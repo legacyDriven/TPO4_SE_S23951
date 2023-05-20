@@ -1,0 +1,22 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: geometry-api
+  config.import:
+    - classpath:properties/persistence.yml
+
+
+
+logging:
+  level:
+    org:
+      springframework:
+        web=DEBUG: DEBUG
+        security=DEBUG: DEBUG
+server.port: 8080
+
+
+
+
+
