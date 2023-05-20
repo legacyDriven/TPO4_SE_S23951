@@ -48,4 +48,19 @@ public class BookService {
 
         return bookDto;
     }
+
+    public BookDto updateBookById(Long id, CreateBookRequest request) {
+        Optional<Book> bookOptional = bookRepository.findById(id);
+        if (bookOptional.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Book not found");
+        }
+
+        Book book = bookOptional.get();
+        mapper.map(request, book); // Zaktualizuj pola książki na podstawie danych z request
+
+        book = bookRepository.save(book); // Zapisz zaktualizowaną książkę w bazie danych
+
+        return mapper.map(book, BookDto.class);
+    }
+
 }
